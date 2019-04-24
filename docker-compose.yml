@@ -1,0 +1,25 @@
+version: '3'
+services:
+  javassified_mysql:
+    image: mysql:8.0.15
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+  javassified_app:
+    build: .
+    command: [
+      "./wait-for-it.sh",
+      "--timeout=80",
+      "javassified_mysql:3306",
+      "--",
+      "java",
+      "-Djava.security.egd=file:/dev/./urandom",
+      "-jar",
+      "/app/target/javassified-1.0.0.jar"]
+    ports:
+      - '80:8080'
+    depends_on:
+      - javassified_mysql

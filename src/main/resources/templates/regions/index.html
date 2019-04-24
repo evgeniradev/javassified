@@ -1,0 +1,8 @@
+ <div xmlns:th="http://thymeleaf.org" layout:decorate="@{layouts/} + ${layout}" layout:fragment="content">
+  <h6>Choose region:</h6>
+  <ul class="list-group">
+    <li th:each="region : ${regions}" class="list-group-item">
+      <a th:text="${region.name}" th:href="@{/ads?region=} + ${region.getSlug()}" />
+    </li>
+  </ul>
+</div>

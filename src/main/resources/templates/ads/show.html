@@ -1,0 +1,21 @@
+<div xmlns:th="http://thymeleaf.org" layout:decorate="@{layouts/} + ${layout}" layout:fragment="content">
+	<div class="media">
+		<div class="media-body">
+			<h5 th:text="${ad.title}" />
+			<p th:text="${ad.description}" class="mt-0" />
+			<small class="text-secondary">
+				Posted
+				<span th:text="${daysAgo}" class="text-primary" />
+				days ago in
+                <span th:text="${ad.region.name}" class="text-primary" />
+                by
+				<span th:text="${ad.user.username}" class="text-primary" />
+			</small>
+		</div>
+	</div>
+    <form th:if="${canDelete}" th:action="@{/ads/} + ${ad.getSlug()} + '/delete'" method="post">
+      <input type="submit" value="Delete" class="float-right btn-delete btn btn-danger" />
+    </form>
+	<a th:text="Back" th:href="@{/ads/} + '?region=' + ${ad.region.getSlug()}" class="btn btn-secondary" />
+	<a th:text="Reply" th:href="@{/ads/} + ${ad.getSlug()}+ '/reply'" class="float-right btn btn-primary" />
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/application.css}" rel="stylesheet">
+  </head>
+  <body class="container">
+    <ul class="nav-menu nav justify-content-end">
+      <li class="nav-item">
+        <a th:href="@{/}" th:text="Home" class="nav-link" />
+      </li>
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a th:href="@{/ads/new}" th:text="'Post Ad'" class="nav-link" />
+      </li>
+  	  <li class="nav-item" sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+          <input type="submit" value="Logout" class="logout-btn nav-link btn-link" />
+        </form>
+  	  </li>
+  	  <li class="nav-item" sec:authorize="!isAuthenticated()">
+        <a th:href="@{/users/signup}" th:text="'Sign up'" class="nav-link" />
+  	  </li>
+      <li class="nav-item" sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}" th:text="'Login'" class="nav-link" />
+      </li>
+    </ul>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+    <div layout:fragment="content" class="wrapper" />
+  </body>
+</html>

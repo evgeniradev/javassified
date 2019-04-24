@@ -1,0 +1,36 @@
+<div xmlns:th="http://thymeleaf.org" layout:decorate="@{layouts/} + ${layout}" layout:fragment="content">
+  <table class="table table-striped">
+  	<thead>
+  		<tr>
+            <th>Title</th>
+  			<th>Date</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr th:each="ad : ${ads}">
+  			<td><a th:text="${ad.title}" th:href="@{/ads/} + ${ad.getSlug()}" /></td>
+            <td th:text="${ad.createdAt}"></td>
+  		</tr>
+  	</tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+  <ul class="float-right pagination">
+    <li class="page-item" th:classappend="${currentPage == previousPage} ? disabled : ''">
+      <a   th:href="@{?region=} + ${regionSlug} + '&page=' + ${previousPage}" class="page-link">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li th:each="pageNumber : ${totalPages}" class="page-item" th:classappend="${currentPage == pageNumber} ? active : ''">
+      <a th:text="${pageNumber}" th:href="@{?region=} + ${regionSlug} + '&page=' + ${pageNumber}" class="page-link"/>
+    </li>
+    <li class="page-item" th:classappend="${currentPage == nextPage || nextPage == 0} ? disabled : ''">
+      <a th:href="@{?region=} + ${regionSlug} + '&page=' + ${nextPage}" class="page-link">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+  <a th:text="Back" th:href="@{/}" class="btn btn-secondary" />
+</div>

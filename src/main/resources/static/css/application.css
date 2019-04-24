@@ -1,0 +1,30 @@
+body {
+  font-size: 15px;
+}
+
+.nav-menu {
+  margin-bottom: 3em;
+}
+
+.logout-btn {
+  border: none;
+}
+
+.btn-delete {
+  margin-left: 0.5em;
+}
+
+.media {
+  margin-bottom: 1em;
+}
+
+.media, .td a {
+  word-break: break-word;
+}
+
+td {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

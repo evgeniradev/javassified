@@ -1,0 +1,20 @@
+<div xmlns:th="http://thymeleaf.org" layout:decorate="@{layouts/} + ${layout}" layout:fragment="content">
+	<form  th:action="@{/users/signup}" method="post" th:object="${user}">
+		<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+		  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+		</ul>
+		<div class="form-group">
+			<input type="text" th:field="*{username}" placeholder="Username" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<input type="email" th:field="*{email}" placeholder="Email" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<input type="password" th:field="*{confirmPassword}" placeholder="Confirm password" class="form-control"/>
+		</div>
+		<button type="submit" class="float-right btn btn-primary">Sign up</button>
+	</form:form>
+</div>
